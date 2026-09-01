@@ -10,33 +10,43 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ExploreSceneIdRouteImport } from './routes/explore.$sceneId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ExploreSceneIdRoute = ExploreSceneIdRouteImport.update({
+  id: '/explore/$sceneId',
+  path: '/explore/$sceneId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/explore/$sceneId': typeof ExploreSceneIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/explore/$sceneId': typeof ExploreSceneIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/explore/$sceneId': typeof ExploreSceneIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/explore/$sceneId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/explore/$sceneId'
+  id: '__root__' | '/' | '/explore/$sceneId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ExploreSceneIdRoute: typeof ExploreSceneIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +58,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/explore/$sceneId': {
+      id: '/explore/$sceneId'
+      path: '/explore/$sceneId'
+      fullPath: '/explore/$sceneId'
+      preLoaderRoute: typeof ExploreSceneIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ExploreSceneIdRoute: ExploreSceneIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
