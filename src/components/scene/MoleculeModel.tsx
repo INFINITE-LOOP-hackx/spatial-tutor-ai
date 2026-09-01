@@ -103,8 +103,13 @@ export function MoleculeModel({ showHydrogens }: { showHydrogens: boolean }) {
         );
       })}
       {bonds.map(([i, j, order], k) => {
-        if (!showHydrogens && (atoms[i].el === "H" || atoms[j].el === "H")) return null;
-        return <Bond key={k} a={positions[i]} b={positions[j]} order={order} />;
+        const from = atoms[i];
+        const to = atoms[j];
+        const pa = positions[i];
+        const pb = positions[j];
+        if (!from || !to || !pa || !pb) return null;
+        if (!showHydrogens && (from.el === "H" || to.el === "H")) return null;
+        return <Bond key={k} a={pa} b={pb} order={order} />;
       })}
       {/* Molecular plane indicator */}
       <mesh rotation={[0, 0, 0]} position={[0.4, -0.4, -0.02]}>
