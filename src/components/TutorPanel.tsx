@@ -23,7 +23,7 @@ export function TutorPanel({ scene, hotspot, viewpoint }: Props) {
   const lastAuto = useRef<string | null>(null);
 
   const mutation = useMutation({
-    mutationFn: (vars: { question?: string; hotspotId?: string }) =>
+    mutationFn: (vars: { question?: string | undefined; hotspotId?: string | undefined }) =>
       ask({
         data: {
           sceneId: scene.id,
