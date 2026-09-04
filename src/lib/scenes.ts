@@ -247,6 +247,67 @@ export const scenes: SceneModule[] = [
       },
     ],
   },
+  {
+    id: "solar-system",
+    title: "Orbital Mechanics",
+    subject: "Astronomy & Physics",
+    tagline: "Gravity written as motion",
+    description:
+      "Navigate a scaled orbital system and examine how velocity, distance and mass produce stable paths. Compare terrestrial and giant-planet orbits from any angle.",
+    level: "Intermediate",
+    duration: "11 min guided",
+    accentLabel: "Astronomy",
+    tutorContext:
+      "You are teaching introductory orbital mechanics and astronomy. Explain gravity, orbital velocity, inclination and scale clearly while distinguishing this schematic model from true astronomical scale.",
+    camera: { position: [7.8, 5.4, 8.8], target: [0, 0, 0] },
+    hotspots: [
+      { id: "sun", name: "Central Star", position: [0, 0, 0], category: "Star", summary: "The dominant mass in the system; its gravity supplies the centripetal acceleration that bends planetary motion into orbits.", facts: ["Contains over 99% of system mass", "Gravity falls with distance squared", "Fusion powers its luminosity"] },
+      { id: "earth-orbit", name: "Terrestrial Orbit", position: [3.25, 0.28, 0.55], category: "Orbit", summary: "A near-circular path where tangential velocity continually carries the planet forward as gravity pulls it inward.", facts: ["One revolution defines a year", "Orbital speed is about 29.8 km/s", "Eccentricity is low"] },
+      { id: "moon", name: "Natural Satellite", position: [3.78, 0.34, 0.55], category: "Satellite", summary: "A secondary body bound to a planet while both orbit their common barycentre and the central star.", facts: ["Tidally locked", "Drives most ocean tides", "Orbit slowly expands"] },
+      { id: "mars", name: "Outer Terrestrial Planet", position: [-4.45, 0.45, 1.2], category: "Planet", summary: "A smaller rocky world on a wider, slower orbit, illustrating the relationship described by Kepler's third law.", facts: ["Orbital period about 687 days", "Two small moons", "More eccentric orbit than Earth"] },
+      { id: "jupiter", name: "Gas Giant", position: [5.55, -0.35, -2.3], category: "Planet", summary: "The system's largest planet strongly perturbs smaller bodies and helps shape resonances in the asteroid belt.", facts: ["Largest planetary mass", "Rapid ten-hour rotation", "Powerful magnetosphere"] },
+    ],
+  },
+  {
+    id: "tectonics",
+    title: "Tectonic Boundaries",
+    subject: "Earth Science",
+    tagline: "Continents in continuous motion",
+    description:
+      "Inspect a divergent plate boundary in section. Trace mantle upwelling, new crust formation and the faults that reshape the ocean floor over geological time.",
+    level: "Foundation",
+    duration: "10 min guided",
+    accentLabel: "Geology",
+    tutorContext:
+      "You are teaching physical geology and plate tectonics. Explain crust, mantle convection, faulting, volcanism and geological timescales using the visible cross-section.",
+    camera: { position: [7, 5.5, 8], target: [0, -0.2, 0] },
+    hotspots: [
+      { id: "ridge", name: "Mid-Ocean Ridge", position: [0, 1.25, 0], category: "Landform", summary: "An underwater mountain chain built where plates separate and hot material rises to create new oceanic crust.", facts: ["Longest mountain system on Earth", "High heat flow", "Hosts hydrothermal vents"] },
+      { id: "left-plate", name: "Diverging Plate", position: [-2.1, 0.25, 0], category: "Lithosphere", summary: "A rigid slab moving away from the spreading centre as new crust is added along its inner edge.", facts: ["Moves centimetres per year", "Carries symmetric magnetic stripes", "Cools and thickens with age"] },
+      { id: "magma", name: "Mantle Upwelling", position: [0, -1.15, 0], category: "Mantle", summary: "Hot mantle rises and partially melts as pressure falls, feeding basaltic magma into the spreading axis.", facts: ["Decompression melting", "Produces basalt", "Transfers interior heat"] },
+      { id: "rift", name: "Axial Rift", position: [0, 0.45, 1.5], category: "Fault Zone", summary: "The central valley where extension fractures young crust and focuses volcanic activity.", facts: ["Dominated by normal faults", "Frequent shallow earthquakes", "Crust is youngest here"] },
+    ],
+  },
+  {
+    id: "gearbox",
+    title: "Mechanical Gear Train",
+    subject: "Mechanical Engineering",
+    tagline: "Torque, speed and contact in motion",
+    description:
+      "Study a live compound gear train. Follow power through meshing teeth and compare how gear diameter changes rotational speed, direction and torque.",
+    level: "Intermediate",
+    duration: "8 min guided",
+    accentLabel: "Engineering",
+    tutorContext:
+      "You are teaching mechanical engineering fundamentals. Explain gear ratios, torque, angular velocity, contact forces and efficiency using the visible gear train.",
+    camera: { position: [5.8, 4.5, 7.2], target: [0, -0.2, 0] },
+    hotspots: [
+      { id: "drive-gear", name: "Drive Gear", position: [-1.25, 0.2, 0.4], category: "Input", summary: "The input gear receives shaft power and establishes the starting angular velocity and torque for the train.", facts: ["Input member", "Rotation drives adjacent gear oppositely", "Power equals torque × angular velocity"] },
+      { id: "driven-gear", name: "Driven Gear", position: [1.45, 0.55, 0.4], category: "Output", summary: "A smaller meshing gear rotates faster than the larger driver while transmitting proportionally less torque, before losses.", facts: ["Speed ratio follows tooth count", "Direction reverses at each mesh", "Contact occurs along tooth profiles"] },
+      { id: "idler", name: "Idler Gear", position: [0.65, -1.45, 0.4], category: "Transfer", summary: "An intermediate gear changes rotation direction and spacing without changing the overall ratio set by input and output gears.", facts: ["Does not alter overall ratio", "Redirects motion", "Adds bearing and mesh losses"] },
+      { id: "gear-mesh", name: "Meshing Teeth", position: [0.15, 0.4, 0.45], category: "Contact", summary: "Involute tooth profiles maintain a nearly constant velocity ratio as contact travels across each pair of teeth.", facts: ["Involute profile", "Requires backlash", "Lubrication limits wear"] },
+    ],
+  },
 ];
 
 export function getScene(id: string): SceneModule | undefined {
