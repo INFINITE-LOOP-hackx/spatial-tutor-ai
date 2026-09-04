@@ -7,6 +7,7 @@ import { CathedralModel } from "./CathedralModel";
 import { HeartModel } from "./HeartModel";
 import { Hotspot3D } from "./Hotspot3D";
 import { MoleculeModel } from "./MoleculeModel";
+import { GearboxModel, SolarSystemModel, TectonicModel } from "./ScienceModels";
 import type { SceneModule } from "@/lib/scenes";
 
 export type Viewpoint = {
@@ -45,7 +46,10 @@ function ViewpointTracker({ onChange }: { onChange: (v: Viewpoint) => void }) {
 function SceneBody({ scene, options }: { scene: SceneModule; options: Record<string, boolean> }) {
   if (scene.id === "cardiac") return <HeartModel pulse={options["pulse"] ?? true} />;
   if (scene.id === "caffeine") return <MoleculeModel showHydrogens={options["hydrogens"] ?? true} />;
-  return <CathedralModel showVault={options["vault"] ?? true} />;
+  if (scene.id === "cathedral") return <CathedralModel showVault={options["vault"] ?? true} />;
+  if (scene.id === "solar-system") return <SolarSystemModel />;
+  if (scene.id === "tectonics") return <TectonicModel />;
+  return <GearboxModel />;
 }
 
 type Props = {
@@ -68,8 +72,8 @@ export function SceneCanvas({ scene, activeHotspot, onSelectHotspot, onViewpoint
       gl={{ antialias: true }}
       onPointerMissed={() => onSelectHotspot("")}
     >
-      <color attach="background" args={["#101725"]} />
-      <fog attach="fog" args={["#101725", 26, 70]} />
+      <color attach="background" args={["#17191d"]} />
+      <fog attach="fog" args={["#17191d", 26, 70]} />
 
       <hemisphereLight args={["#bcd7ff", "#2a2f3d", 0.55]} />
       <directionalLight
@@ -111,7 +115,7 @@ export function SceneCanvas({ scene, activeHotspot, onSelectHotspot, onViewpoint
         dampingFactor={0.08}
         minDistance={2.5}
         maxDistance={30}
-        target={scene.camera.target as unknown as THREE.Vector3 & [number, number, number]}
+        target={scene.camera.target}
         autoRotate={autoRotate}
         autoRotateSpeed={0.55}
       />
