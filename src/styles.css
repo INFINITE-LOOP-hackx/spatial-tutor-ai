@@ -17,8 +17,8 @@
   --radius-xl: calc(var(--radius) + 4px);
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
-  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -172,4 +172,102 @@
 
 @utility animate-pulse-ring {
   animation: pulse-ring 2.2s ease-out infinite;
+}
+
+/* ---------- Motion layer: animated backdrop + reveal utilities ---------- */
+
+@keyframes aurora-drift {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  33% { transform: translate3d(6%, -4%, 0) scale(1.12); }
+  66% { transform: translate3d(-5%, 5%, 0) scale(0.94); }
+  100% { transform: translate3d(0, 0, 0) scale(1); }
+}
+
+@keyframes grid-pan {
+  0% { background-position: 0 0; }
+  100% { background-position: 56px 56px; }
+}
+
+@keyframes float-up {
+  0% { transform: translateY(0) scale(1); opacity: 0; }
+  12% { opacity: 0.8; }
+  88% { opacity: 0.5; }
+  100% { transform: translateY(-120vh) scale(1.25); opacity: 0; }
+}
+
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes sheen {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+@utility aurora-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(70px);
+  opacity: 0.4;
+  animation: aurora-drift 22s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@utility grid-drift {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--grid) 20%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--grid) 20%, transparent) 1px, transparent 1px);
+  background-size: 56px 56px;
+  animation: grid-pan 18s linear infinite;
+}
+
+@utility spark {
+  position: absolute;
+  border-radius: 9999px;
+  background-color: color-mix(in oklab, var(--primary) 75%, transparent);
+  box-shadow: 0 0 10px color-mix(in oklab, var(--primary) 60%, transparent);
+  animation: float-up linear infinite;
+  pointer-events: none;
+}
+
+@utility animate-reveal {
+  animation: reveal-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@utility text-sheen {
+  background-image: linear-gradient(
+    100deg,
+    var(--primary) 0%,
+    var(--primary-glow) 25%,
+    var(--accent) 50%,
+    var(--primary-glow) 75%,
+    var(--primary) 100%
+  );
+  background-size: 200% 100%;
+  background-clip: text;
+  color: transparent;
+  animation: sheen 7s linear infinite;
+}
+
+@utility card-lift {
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+
+@utility card-lift-hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-glow);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }
