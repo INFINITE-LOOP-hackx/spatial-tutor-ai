@@ -97,8 +97,8 @@ function Landing() {
 
           <dl style={{ animationDelay: "380ms" }} className="animate-reveal mt-14 grid max-w-3xl grid-cols-2 gap-6 md:grid-cols-4">
             {[
-              ["3", "Spatial modules"],
-              ["19", "Interactive structures"],
+              [String(scenes.length), "Spatial modules"],
+              [String(scenes.reduce((n, s) => n + s.hotspots.length, 0)), "Interactive structures"],
               ["60 fps", "Target render loop"],
               ["0", "Plugins to install"],
             ].map(([v, l]) => (
@@ -140,7 +140,7 @@ function Landing() {
         <div className="flex items-end justify-between gap-4">
           <div>
             <p className="label-mono text-primary">Learning modules</p>
-            <h2 className="mt-2 text-2xl font-semibold md:text-3xl">Three spatial subjects, one engine</h2>
+            <h2 className="mt-2 text-2xl font-semibold md:text-3xl">Six spatial subjects, one engine</h2>
           </div>
           <Compass className="hidden h-6 w-6 text-muted-foreground md:block" />
         </div>
