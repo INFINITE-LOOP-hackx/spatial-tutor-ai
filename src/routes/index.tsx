@@ -1,6 +1,7 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { Boxes, Brain, Compass, Cpu, Gauge, MousePointerClick, Radar, Sparkles } from "lucide-react";
 
+import { AnimatedBackdrop } from "@/components/AnimatedBackdrop";
 import { scenes } from "@/lib/scenes";
 
 export const Route = createFileRoute("/")({
@@ -55,52 +56,49 @@ const pipeline = [
   { step: "04", label: "Explain", text: "The tutor answers about that structure, from that angle, and invites the next spatial question." },
 ];
 
-export default function LandingDefault() {
-  return <Landing />;
-}
-
 function Landing() {
   return (
-    <main>
+    <main className="relative">
+      <AnimatedBackdrop />
       {/* Hero */}
       <section className="grid-backdrop relative overflow-hidden border-b border-border/60">
         <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
-          <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1">
-            <Sparkles className="h-3.5 w-3.5 text-primary" />
+          <div className="animate-reveal inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 backdrop-blur">
+            <Sparkles className="h-3.5 w-3.5 animate-pulse text-primary" />
             <span className="label-mono text-primary">Immersive spatial learning</span>
           </div>
 
-          <h1 className="mt-6 max-w-4xl text-4xl leading-[1.05] font-bold md:text-6xl">
+          <h1 style={{ animationDelay: "80ms" }} className="animate-reveal mt-6 max-w-4xl text-4xl leading-[1.05] font-bold md:text-6xl">
             Stop learning three-dimensional subjects through
-            <span className="text-gradient-instrument"> flat media.</span>
+            <span className="text-sheen"> flat media.</span>
           </h1>
 
-          <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
+          <p style={{ animationDelay: "180ms" }} className="animate-reveal mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
             SPATIA renders anatomy, molecular chemistry and architectural history as navigable 3D environments in the
             browser. An AI tutor tracks your viewpoint and every structure you click, then explains exactly what you are
             looking at — with the scale and spatial relationships a textbook diagram destroys.
           </p>
 
-          <div className="mt-9 flex flex-wrap items-center gap-3">
+          <div style={{ animationDelay: "280ms" }} className="animate-reveal mt-9 flex flex-wrap items-center gap-3">
             <Link
               to="/explore/$sceneId"
               params={{ sceneId: "cardiac" }}
-              className="inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+              className="inline-flex items-center gap-2 card-lift rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground hover:-translate-y-0.5 hover:opacity-90 hover:shadow-[var(--shadow-glow)]"
             >
               <Boxes className="h-4 w-4" /> Enter the 3D studio
             </Link>
             <Link
               to="/about"
-              className="inline-flex items-center gap-2 rounded-xl border border-border px-5 py-3 text-sm font-medium text-foreground transition-colors hover:border-primary/60 hover:text-primary"
+              className="inline-flex items-center gap-2 card-lift rounded-xl border border-border px-5 py-3 text-sm font-medium text-foreground hover:-translate-y-0.5 hover:border-primary/60 hover:text-primary"
             >
               <Cpu className="h-4 w-4" /> How it's engineered
             </Link>
           </div>
 
-          <dl className="mt-14 grid max-w-3xl grid-cols-2 gap-6 md:grid-cols-4">
+          <dl style={{ animationDelay: "380ms" }} className="animate-reveal mt-14 grid max-w-3xl grid-cols-2 gap-6 md:grid-cols-4">
             {[
-              ["3", "Spatial modules"],
-              ["19", "Interactive structures"],
+              [String(scenes.length), "Spatial modules"],
+              [String(scenes.reduce((n, s) => n + s.hotspots.length, 0)), "Interactive structures"],
               ["60 fps", "Target render loop"],
               ["0", "Plugins to install"],
             ].map(([v, l]) => (
@@ -116,7 +114,7 @@ function Landing() {
       {/* Problem → hack */}
       <section className="mx-auto max-w-6xl px-6 py-16 md:py-20">
         <div className="grid gap-6 md:grid-cols-2">
-          <article className="panel p-6">
+          <article className="panel card-lift p-6 hover:-translate-y-1 hover:border-primary/40">
             <p className="label-mono text-accent">The problem</p>
             <h2 className="mt-3 text-xl font-semibold">2D media breaks spatial understanding</h2>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
@@ -125,7 +123,7 @@ function Landing() {
               it, how thick its wall is relative to the right, or why that difference exists at all.
             </p>
           </article>
-          <article className="panel p-6">
+          <article className="panel card-lift p-6 hover:-translate-y-1 hover:border-primary/40">
             <p className="label-mono text-primary">The approach</p>
             <h2 className="mt-3 text-xl font-semibold">Render the space, then explain it in place</h2>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
@@ -142,7 +140,7 @@ function Landing() {
         <div className="flex items-end justify-between gap-4">
           <div>
             <p className="label-mono text-primary">Learning modules</p>
-            <h2 className="mt-2 text-2xl font-semibold md:text-3xl">Three spatial subjects, one engine</h2>
+            <h2 className="mt-2 text-2xl font-semibold md:text-3xl">Six spatial subjects, one engine</h2>
           </div>
           <Compass className="hidden h-6 w-6 text-muted-foreground md:block" />
         </div>
@@ -153,7 +151,7 @@ function Landing() {
               key={scene.id}
               to="/explore/$sceneId"
               params={{ sceneId: scene.id }}
-              className="panel group flex flex-col p-5 transition-transform hover:-translate-y-1"
+              className="panel card-lift group flex flex-col p-5 hover:-translate-y-1.5 hover:border-primary/50 hover:shadow-[var(--shadow-glow)]"
             >
               <div className="flex items-center justify-between">
                 <span className="rounded-full border border-primary/40 bg-primary/10 px-2.5 py-0.5 font-mono text-[10px] tracking-widest uppercase text-primary">
@@ -180,8 +178,8 @@ function Landing() {
           <h2 className="mt-2 text-2xl font-semibold md:text-3xl">Graphics pipeline meets LLM context awareness</h2>
           <div className="mt-9 grid gap-5 sm:grid-cols-2">
             {capabilities.map((c) => (
-              <div key={c.title} className="rounded-xl border border-border/70 bg-background/40 p-5">
-                <c.icon className="h-5 w-5 text-primary" />
+              <div key={c.title} className="card-lift rounded-xl border border-border/70 bg-background/40 p-5 hover:-translate-y-1 hover:border-primary/50">
+                <c.icon className="h-5 w-5 text-primary transition-transform duration-300 group-hover:scale-110" />
                 <h3 className="mt-3 text-base font-semibold">{c.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{c.body}</p>
               </div>
@@ -196,7 +194,7 @@ function Landing() {
         <h2 className="mt-2 text-2xl font-semibold md:text-3xl">From camera coordinates to a grounded explanation</h2>
         <ol className="mt-9 grid gap-4 md:grid-cols-4">
           {pipeline.map((p) => (
-            <li key={p.step} className="panel p-5">
+            <li key={p.step} className="panel card-lift p-5 hover:-translate-y-1 hover:border-primary/50">
               <span className="font-mono text-xs text-primary">{p.step}</span>
               <h3 className="mt-2 font-display text-base font-semibold">{p.label}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.text}</p>
